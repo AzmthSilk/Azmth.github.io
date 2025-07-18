@@ -1,34 +1,57 @@
 /* --- 全局样式 --- */
 body {
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723a9ce6890'); /* 您可以替换成自己喜欢的背景图 */
-    background-size: cover;
-    background-attachment: fixed;
+    /* 您可以替换 url() 中的链接为您自己喜欢的背景图 */
+    background-image: url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1887&auto=format&fit=crop');
+    background-size: cover; /* 背景图铺满整个屏幕 */
+    background-position: center center; /* 背景图居中显示 */
+    background-attachment: fixed; /* 背景图固定，滚动时不移动 */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    color: #fff;
+    color: #ffffff; /* 默认文字颜色为纯白 */
     margin: 0;
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* --- 主要内容容器 --- */
+.main-container, .list-container {
+    width: 100%;
+    max-width: 1200px; /* 限制内容最大宽度，优化大屏幕显示 */
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 /* --- 磁贴基础样式 --- */
 .tile {
-    background: rgba(255, 255, 255, 0.15); /* 半透明背景 */
-    backdrop-filter: blur(10px); /* 毛玻璃效果的关键 */
-    -webkit-backdrop-filter: blur(10px); /* 兼容 Safari */
+    background: rgba(255, 255, 255, 0.1); /* 降低透明度以增强文字对比 */
+    backdrop-filter: blur(12px); /* 毛玻璃效果的关键 */
+    -webkit-backdrop-filter: blur(12px); /* 兼容 Safari */
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     padding: 2rem;
     text-align: center;
     transition: all 0.3s ease;
+    color: #ffffff; /* 确保磁贴内默认文字颜色为白色 */
 }
 
+/* --- 磁贴悬停效果 --- */
 .tile:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+    transform: translateY(-10px); /* 向上浮动 */
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.2); /* 悬停时更亮一点 */
+}
+
+/* --- 磁贴内部文字样式 (关键：确保文字清晰) --- */
+.tile h1,
+.tile h2,
+.tile p {
+    color: #ffffff;  /* 强制设为纯白色 */
+    opacity: 1;       /* 强制设为完全不透明 */
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* 给文字加一点阴影以增强可读性 */
 }
 
 /* --- 大标题磁贴 --- */
@@ -45,19 +68,24 @@ body {
 .large-tile p {
     font-size: 1.5rem; /* 大字体 */
     margin-top: 0.5rem;
-    opacity: 0.8;
+    font-weight: 300; /* 细一点的字体 */
 }
 
 /* --- 分类磁贴网格布局 --- */
 .grid-container {
     display: grid;
+    /* 自动适配列数，每列最小250px */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
+/* --- 分类磁贴和所有链接 (`<a>`) 的样式 --- */
+a.tile, a {
+    text-decoration: none; /* 去掉所有链接的下划线 */
+    color: #ffffff; /* 确保链接文字为白色 */
+}
+
 .category-tile {
-    text-decoration: none;
-    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,18 +97,35 @@ body {
     margin: 0;
 }
 
-/* --- 响应式设计，适应手机屏幕 --- */
+/* --- 文件列表页面样式 --- */
+.file-list a {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.file-list a .tile {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* --- 响应式设计，适应小屏幕（如手机） --- */
 @media (max-width: 768px) {
     body {
         padding: 1rem;
     }
+
     .large-tile h1 {
-        font-size: 2.5rem;
+        font-size: 2.5rem; /* 在手机上缩小标题 */
     }
+
     .large-tile p {
         font-size: 1.2rem;
     }
+
     .category-tile h2 {
         font-size: 1.5rem;
+    }
+
+    .tile {
+        padding: 1.5rem;
     }
 }
