@@ -1,1 +1,1 @@
-# Azmth.github.io
+# 马克思主义部分资料分享
